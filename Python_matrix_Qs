@@ -1,0 +1,171 @@
+"""Problem 1: Filter and Validate Matrix Rows
+Statement:
+You are given a 4×4 matrix. Check each row to ensure all values lie between 1 and 100.
+Then, filter out the rows where the sum of the elements is less than 150.
+Finally, return the valid and filtered rows sorted in descending order of their row sums.
+"""
+
+matrix = [
+    [2,7,4,1],
+    [9,5,3,8],
+    [6,0,2,4],
+    [1,8,7,3]
+]
+
+valid_filtered_rows = list(filter(lambda row: all(1<=x<=100 for x in row)and sum(row)<=150,matrix))
+sorted_rows = sorted(valid_filtered_rows,key=lambda row: sum(row), reverse= True)
+print(sorted_rows)
+
+
+
+"""
+Problem # 4
+ Sorting Even Numbers in Matrix
+Statement:
+You are given a 3×3 matrix. First, validate that all numbers are even and between 2 and 100.
+Extract all even numbers from the matrix and sort them in descending order.
+Return the sorted list.
+
+"""
+
+matrix2 = [
+    [2, 8, 4, 6],  
+    [9, 5, 3, 8],  
+    [6, 0, 2, 4]    
+]
+
+# Filter rows with all even numbers and in range 2-100
+valid_even_numbers = list(filter(
+    lambda row: all(2 <= x <= 100 and x % 2 == 0 for x in row),
+    matrix2
+))
+
+# Sort rows by ascending row sum
+sorted_rows = sorted(valid_even_numbers, key=lambda row: sum(row), reverse=True)
+print(sorted_rows)
+
+
+
+"""
+ Problem 2: Diagonal Sort with Range Check
+Statement:
+You are given a 5×5 matrix. Validate that all elements lie between 0 and 50.
+Then, extract both the primary and secondary diagonals.
+Sort both diagonals separately in ascending order, and return the sorted lists.
+
+"""
+matrix = [
+    [10, 2, 3, 4, 5],
+    [6, 15, 8, 9, 10],
+    [11, 12, 20, 14, 15],
+    [16, 17, 18, 25, 20],
+    [21, 22, 23, 24, 30]
+]
+
+# Step 1: Validate all elements are in 0–50
+if all(0 <= x <= 50 for row in matrix for x in row):
+    
+    n = len(matrix)
+
+    # Step 2: Extract primary and secondary diagonals
+    primary_diag = [matrix[i][i] for i in range(n)]
+    secondary_diag = [matrix[i][n - 1 - i] for i in range(n)]
+
+    # Step 3: Sort both diagonals
+    primary_sorted = sorted(primary_diag)
+    secondary_sorted = sorted(secondary_diag)
+
+    # Step 4: Return results
+    print("Primary Diagonal Sorted:", primary_sorted)
+    print("Secondary Diagonal Sorted:", secondary_sorted)
+
+else:
+    print("Matrix contains elements outside the range 0–50.")
+
+"""
+ Problem 3: Column Filter Based on Average
+Statement:
+Given a 4×4 matrix with integer values between 10 and 99, calculate the average of each column.
+Filter out columns where the average is greater than 70.
+Return the indices of the remaining columns, and their values sorted in ascending order.
+"""
+
+def filter_columns_by_average(matrix):
+    n = len(matrix)  # Number of rows
+    m = len(matrix[0])  # Number of columns
+
+    # Transpose the matrix to get columns easily using zip
+    transposed = list(zip(*matrix))
+
+    # Using list comprehension to filter and process columns
+    result = [
+        (i, sorted(list(col)))
+        for i, col in enumerate(transposed)
+        if sum(col) / n <= 70
+    ]
+
+    # Separate indices and sorted column values
+    indices = [i for i, col in result]
+    sorted_columns = [col for i, col in result]
+
+    return indices, sorted_columns
+
+
+# Example 4x4 matrix (values between 10 and 99)
+matrix = [
+    [50, 80, 60, 72],
+    [65, 75, 62, 90],
+    [45, 92, 67, 85],
+    [55, 88, 63, 70]
+]
+
+indices, columns = filter_columns_by_average(matrix)
+
+print("Valid Column Indices:", indices)
+print("Sorted Column Values:")
+for col in columns:
+    print(col)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #  how to solve Diagonal Problems:
+# a = int(input("Enter number of rows: "))
+# b = int(input("Enter number of columns: "))
+# m = []
+
+# for i in range(a):
+#     c = []
+#     for j in range(b):
+#         num = int(input("Enter number in pocket [" + str(i) + "][" + str(j) + "]: "))
+#         c.append(num)
+#     m.append(c)
+
+# # Printing the matrix to verify
+# print("Matrix is....")
+# for i in range(a):
+#     for j in range(b):
+#         print(m[i][j],end= "")
+#     print()
+# suml = 0
+# sumr =0
+# for i in range(a):
+#     for j in range(b):
+#         if i==j:
+#             suml= suml+m[i][j]
+#         if i+j ==3-1:
+#             sumr = sumr+m[i][j]   
+# print("left Diagonal Sum", suml)
+# print("Right Diagonal Sum",sumr)
