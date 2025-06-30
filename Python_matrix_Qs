@@ -181,6 +181,128 @@ else:
 
 
 
+"""
+:small_blue_diamond: Problem 1: Row-wise Flatten with Validation
+Statement:
+You are given a 4×4 matrix. Validate that all values are between 0 and 100.
+Then, convert the matrix into a single array by reading it row by row (left to right).
+Return the flattened array.
+"""
+
+Matrix4 = [
+    [20,80,90,70],
+    [30,50,60,80],
+    [10,20,30,40],
+    [90,80,30,50]
+]
+flat = []
+for row in Matrix4:
+    for val in row:
+        if 0<=val<=100:
+            flat.append(val)
+        else:
+            raise ValueError("Invalid Error!")
+
+print(flat)
+        
+
+
+"""
+Problem 2: Column-wise Flatten
+Statement:
+Given a 3×3 matrix of integers, flatten it into a single array by reading it column by column (top to bottom).
+Return the resulting array.
+"""
+Matrix3 = [
+    [20,80,90,70],
+    [30,50,60,80],
+    [10,20,30,40]
+]
+flat1 = []
+
+for col in range(3):
+    for row in range(3):
+        flat1.append(Matrix3[row][col])
+
+
+
+print(flat1)
+
+
+
+"""
+Problem 3: Zigzag Row-wise Flatten
+Statement:
+You are given a 4×4 matrix. Flatten the matrix in a zigzag row-wise pattern:
+	•	Row 0: left to right
+	•	Row 1: right to left
+	•	Row 2: left to right
+	•	… and so on.
+Return the resulting array.
+
+"""
+mat = [
+    [1,2,3,4],
+    [5,6,7,8],
+    [9,8,7,6]
+]
+flat3 = []
+for i, row in enumerate(mat):
+    if i %2==0:
+        flat3.extend(row)
+    else:
+        flat3.extend(row[::-1])
+    
+
+print(flat3)
+
+
+"""
+ Problem 5: Diagonal Flatten (Top-left to Bottom-right)
+Statement:
+You are given a 4×4 matrix. Extract and flatten the diagonals (top-left to bottom-right) of the matrix into a single array.
+Start from the top-left element, move diagonally to the bottom-right.
+Return the diagonal values as an array.
+"""
+
+matrix1 = [
+    [20,80,90,70],
+    [30,50,60,80],
+    [10,20,30,40],
+    [90,80,70,50]
+]
+
+flat = [matrix1[i][i] for i in range(4)]
+print(flat)
+
+
+
+
+matrix5 = [
+     [20,80,90,70],
+    [30,50,60,80],
+    [10,20,30,40],
+    [90,80,70,50]
+]
+
+flat = []
+for col in range(4):
+    if col  % 2 == 0:
+        for row in range(4):
+            flat.append(matrix5[row][col])
+    
+    else:
+        for row in range(3,-1,-1):
+            flat.append(matrix5[row][col])
+
+
+print(flat)
+
+
+
+
+
+
 
 
 # #  how to solve Diagonal Problems:
